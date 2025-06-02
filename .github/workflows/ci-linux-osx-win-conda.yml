@@ -19,7 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         build_type: [Release, Debug]
-        name: [ubuntu-latest, macos-latest, windows-2019-clang-cl, windows-latest, macos-14]
+        name: [ubuntu-latest, macos-latest, windows-latest-clang-cl, windows-latest, macos-13]
         cxx_std: [17, 20]
         continue_on_error: [false]
 
@@ -28,13 +28,11 @@ jobs:
             os: ubuntu-latest
           - name: macos-latest
             os: macos-latest
-          - name: macos-14
-            os: macos-14
-          # proxsuite doesn't build with vs2019, so we use clang-cl instead
-          - name: windows-2019-clang-cl
-            os: windows-2019
+          - name: macos-13
+            os: macos-13
+          - name: windows-latest-clang-cl
+            os: windows-latest
             compiler: clang-cl
-          # proxsuite should work with vs2022
           - name: windows-latest
             os: windows-latest
             compiler: cl
