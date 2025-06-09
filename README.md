@@ -13,7 +13,7 @@
 **ProxSuite** is a collection of open-source, numerically robust, precise, and efficient numerical solvers (e.g., LPs, QPs, etc.) rooted in revisited primal-dual proximal algorithms.
 Through **ProxSuite**, we aim to offer the community scalable optimizers that deal with dense, sparse, or matrix-free problems. While the first targeted application is Robotics, **ProxSuite** can be used in other contexts without limits.
 
-**ProxSuite** is actively developped and supported by the [Willow](https://www.di.ens.fr/willow/) and [Sierra](https://www.di.ens.fr/sierra/) research groups, joint research teams between [Inria](https://www.inria.fr/en), [École Normale Supérieure de Paris](https://www.ens.fr) and [Centre National de la Recherche Scientifique](https://www.cnrs.fr) localized in France.
+**ProxSuite** is actively developed and supported by the [Willow](https://www.di.ens.fr/willow/) and [Sierra](https://www.di.ens.fr/sierra/) research groups, joint research teams between [Inria](https://www.inria.fr/en), [École Normale Supérieure de Paris](https://www.ens.fr) and [Centre National de la Recherche Scientifique](https://www.cnrs.fr) localized in France.
 
 **ProxSuite** is already integrated into:
 - [CVXPY](https://www.cvxpy.org/) modeling language for convex optimization problems,
@@ -160,12 +160,12 @@ $$
 \end{align}
 $$
 
-where $x \in \mathbb{R}^n$ is the optimization variable. The objective function is defined by a positive semidefinite matrix $H(\theta) \in \mathcal{S}^n_+$ and a vector $g(\theta) \in \mathbb{R}^n$. The linear constraints are defined by the equality-contraint matrix $A(\theta) \in \mathbb{R}^{n_\text{eq} \times n}$ and the inequality-constraint matrix $C(\theta) \in \mathbb{R}^{n_\text{in} \times n}$ and the vectors $b \in \mathbb{R}^{n_\text{eq}}$, $l(\theta) \in \mathbb{R}^{n_\text{in}}$ and $u(\theta) \in \mathbb{R}^{n_\text{in}}$ so that $b_i \in \mathbb{R},~ \forall i = 1,...,n_\text{eq}$ and $l_i \in \mathbb{R} \cup \{ -\infty \}$ and $u_i \in \mathbb{R} \cup \{ +\infty \}, ~\forall i = 1,...,n_\text{in}$.
+where $x \in \mathbb{R}^n$ is the optimization variable. The objective function is defined by a positive semidefinite matrix $H(\theta) \in \mathcal{S}^n_+$ and a vector $g(\theta) \in \mathbb{R}^n$. The linear constraints are defined by the equality-constraint matrix $A(\theta) \in \mathbb{R}^{n_\text{eq} \times n}$ and the inequality-constraint matrix $C(\theta) \in \mathbb{R}^{n_\text{in} \times n}$ and the vectors $b \in \mathbb{R}^{n_\text{eq}}$, $l(\theta) \in \mathbb{R}^{n_\text{in}}$ and $u(\theta) \in \mathbb{R}^{n_\text{in}}$ so that $b_i \in \mathbb{R},~ \forall i = 1,...,n_\text{eq}$ and $l_i \in \mathbb{R} \cup \{ -\infty \}$ and $u_i \in \mathbb{R} \cup \{ +\infty \}, ~\forall i = 1,...,n_\text{in}$.
 
 **QPLayer** is able to learn more structured architectures. For example, $\theta$ can consists only in learning some elements of $A$ while letting $b$ fixed (see e.g., the [example](https://github.com/Simple-Robotics/proxsuite/blob/devel/examples/python/qplayer_sudoku.py) about how to include QPLayer into a learning pipeline). **QPLayer** can also differentiates over LPs. **QPLayer** allows for parallelized calculus over CPUs, and is interfaced with **PyTorch**.
 ### Citing **QPLayer**
 
-If you are using **QPLayer** for your work, we encourage you to [cite the related paper](https://inria.hal.science/hal-04133055/file/QPLayer_Preprint.pdf).
+If you are using **QPLayer** for your work, we encourage you to [cite the related paper](https://inria.hal.science/hal-04133055v2/).
 ## Installation procedure
 
 Please follow the installation procedure [here](https://github.com/Simple-Robotics/proxsuite/blob/devel/doc/5-installation.md).
