@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 - Change the default branch to `devel` ([#395](https://github.com/Simple-Robotics/proxsuite/pull/395))
+- Change `dual_feasibility` test threshold in `sparse_maros_meszaros` unit test ([#403](https://github.com/Simple-Robotics/proxsuite/pull/403))
 
 ## [0.7.2] - 2025-03-12
 
