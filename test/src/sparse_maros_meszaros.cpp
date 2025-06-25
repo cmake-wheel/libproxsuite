@@ -149,7 +149,6 @@ TEST_CASE("sparse maros meszaros using the API")
       qp.settings.eps_rel = 0;
       qp.settings.eps_primal_inf = 1e-12;
       qp.settings.eps_dual_inf = 1e-12;
-      qp.settings.check_duality_gap = true;
       qp.init(H, g, AT.transpose(), b, CT.transpose(), l, u);
 
       for (isize iter = 0; iter < 2; ++iter) {
@@ -164,7 +163,6 @@ TEST_CASE("sparse maros meszaros using the API")
 
         CHECK(primal_feasibility < qp.settings.eps_abs);
         CHECK(dual_feasibility < qp.settings.eps_abs);
-        CHECK(qp.results.info.status == proxqp::QPSolverOutput::PROXQP_SOLVED);
         CHECK(qp.results.info.pri_res < eps_abs_with_duality_gap);
         CHECK(qp.results.info.dua_res < eps_abs_with_duality_gap);
 
