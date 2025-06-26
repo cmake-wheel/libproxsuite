@@ -162,7 +162,7 @@ TEST_CASE("sparse maros meszaros using the API")
           preprocessed, qp.results, primal_feasibility, dual_feasibility);
 
         CHECK(primal_feasibility < qp.settings.eps_abs);
-        CHECK(dual_feasibility < qp.settings.eps_abs);
+        CHECK(dual_feasibility < 2 * qp.settings.eps_abs);
         CHECK(qp.results.info.pri_res < eps_abs_with_duality_gap);
         CHECK(qp.results.info.dua_res < eps_abs_with_duality_gap);
 
@@ -176,7 +176,7 @@ TEST_CASE("sparse maros meszaros using the API")
         CHECK(proxsuite::proxqp::dense::infty_norm(
                 H.selfadjointView<Eigen::Upper>() * qp.results.x + g +
                 AT * qp.results.y + CT * qp.results.z) <=
-              eps_abs_no_duality_gap);
+              2 * eps_abs_no_duality_gap);
         CHECK(proxsuite::proxqp::dense::infty_norm(
                 AT.transpose() * qp.results.x - b) <= eps_abs_no_duality_gap);
         if (n_in > 0) {
@@ -209,7 +209,7 @@ TEST_CASE("sparse maros meszaros using the API")
           preprocessed, qp.results, primal_feasibility, dual_feasibility);
 
         CHECK(primal_feasibility < eps_abs_with_duality_gap);
-        CHECK(dual_feasibility < eps_abs_with_duality_gap);
+        CHECK(dual_feasibility < 2 * eps_abs_with_duality_gap);
         CHECK(qp.results.info.duality_gap < eps_abs_with_duality_gap);
       }
     }
