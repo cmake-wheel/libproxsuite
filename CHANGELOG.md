@@ -13,6 +13,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 - Use the right table to store `configure-args` cmeel argument ([#403](https://github.com/Simple-Robotics/proxsuite/pull/403))
 
+### Removed
+- Don't release PyPy package on GNU/Linux anymore ([#403](https://github.com/Simple-Robotics/proxsuite/pull/403))
+
 ## [0.7.2] - 2025-03-12
 
 ### Fixed
