@@ -170,7 +170,7 @@ struct binary_traits<Dyn, Dyn>
 #define VEG_OP(Name, TypeName, Op)                                             \
   using TypeName /* NOLINT(bugprone-macro-parentheses) */ = Dyn;               \
   VEG_NODISCARD VEG_INLINE static constexpr auto Name##_fn(Dyn a, Dyn b)       \
-    VEG_NOEXCEPT->TypeName                                                     \
+    VEG_NOEXCEPT -> TypeName                                                   \
   {                                                                            \
     return { isize(usize(isize(a)) Op usize(isize(b))) };                      \
   }                                                                            \
@@ -179,7 +179,7 @@ struct binary_traits<Dyn, Dyn>
 #define VEG_CMP(Name, TypeName, Op)                                            \
   using TypeName /* NOLINT(bugprone-macro-parentheses) */ = Boolean<maybe>;    \
   VEG_NODISCARD VEG_INLINE static constexpr auto Name##_fn(Dyn a, Dyn b)       \
-    VEG_NOEXCEPT->TypeName                                                     \
+    VEG_NOEXCEPT -> TypeName                                                   \
   {                                                                            \
     return (isize(a) Op isize(b));                                             \
   }                                                                            \

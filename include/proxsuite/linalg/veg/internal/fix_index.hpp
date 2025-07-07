@@ -272,7 +272,7 @@ struct binary_traits<Fix<N>, Fix<M>>
   using TypeName /* NOLINT(bugprone-macro-parentheses) */ =                    \
     Fix<isize(usize(isize{ N }) Op usize(isize{ M }))>;                        \
   VEG_NODISCARD VEG_INLINE static constexpr auto Name##_fn(Fix<N>, Fix<M>)     \
-    VEG_NOEXCEPT->TypeName                                                     \
+    VEG_NOEXCEPT -> TypeName                                                   \
   {                                                                            \
     return {};                                                                 \
   }                                                                            \
@@ -282,7 +282,7 @@ struct binary_traits<Fix<N>, Fix<M>>
   using TypeName /* NOLINT(bugprone-macro-parentheses) */ =                    \
     Boolean<(N Op M) ? yes : no>;                                              \
   VEG_NODISCARD VEG_INLINE static constexpr auto Name##_fn(Fix<N>, Fix<M>)     \
-    VEG_NOEXCEPT->TypeName                                                     \
+    VEG_NOEXCEPT -> TypeName                                                   \
   {                                                                            \
     return {};                                                                 \
   }                                                                            \
