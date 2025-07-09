@@ -177,9 +177,9 @@ jobs:
       run: |
         cd test/packaging/external
         mkdir build && cd build
-        export PINOCCHIO_GIT_REPOSITORY="file://"$GITHUB_WORKSPACE
-        export PINOCCHIO_GIT_TAG="test-external-"$(git rev-parse --short HEAD)
-        git tag $PINOCCHIO_GIT_TAG
+        export PROXSUITE_GIT_REPOSITORY="file://"$GITHUB_WORKSPACE
+        export PROXSUITE_GIT_TAG="test-external-"$(git rev-parse --short HEAD)
+        git tag $PROXSUITE_GIT_TAG
         cmake ..  -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
         cmake --build . --config ${{ matrix.build_type }} --target all
         ./run-proxqp
