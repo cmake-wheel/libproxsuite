@@ -9,7 +9,8 @@ FetchContent_Declare(
   proxsuite-c++
   GIT_REPOSITORY $ENV{PROXSUITE_GIT_REPOSITORY}
   GIT_TAG $ENV{PROXSUITE_GIT_TAG}
-  GIT_SHALLOW ON)
+  GIT_SHALLOW ON
+)
 FetchContent_MakeAvailable(proxsuite-c++)
 
 add_executable(run-proxqp ${CMAKE_CURRENT_LIST_DIR}/../src/run-proxqp.cpp)
