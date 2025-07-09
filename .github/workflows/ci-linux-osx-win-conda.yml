@@ -171,6 +171,19 @@ jobs:
     #     g++ -std=c++17 examples/cpp/overview-simple.cpp -o overview-simple $(pkg-config --cflags proxsuite)
     #     ./overview-simple
 
+    - name: Test FetchContent packaging [Conda/Linux&macOS]
+      if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
+      shell: bash -l {0}
+      run: |
+        cd test/packaging/external
+        mkdir build && cd build
+        export PROXSUITE_GIT_REPOSITORY="file://"$GITHUB_WORKSPACE
+        export PROXSUITE_GIT_TAG="test-external-"$(git rev-parse --short HEAD)
+        git tag $PROXSUITE_GIT_TAG
+        cmake ..  -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        cmake --build . --config ${{ matrix.build_type }} --target all
+        ./run-proxqp
+
     - name: Test CMake packaging [Conda/Linux&macOS]
       if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
       shell: bash -l {0}
