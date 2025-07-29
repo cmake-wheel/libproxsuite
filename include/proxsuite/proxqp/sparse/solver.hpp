@@ -117,7 +117,7 @@ ldl_iter_solve_noalias(
 
   LDLT_TEMP_VEC_UNINIT(T, err, n_tot, stack);
 
-  T prev_err_norm = std::numeric_limits<T>::infinity();
+  T prev_err_norm = std::numeric_limits<T>::max();
 
   for (isize solve_iter = 0; solve_iter < settings.nb_iterative_refinement;
        ++solve_iter) {
@@ -1209,7 +1209,7 @@ qp_solve(Results<T>& results,
               std::unique(alphas.data(), alphas.data() + alphas_count) -
               alphas.data();
             if (alphas_count > 0) { //&& alphas[0] <= 1
-              auto infty = std::numeric_limits<T>::infinity();
+              auto infty = std::numeric_limits<T>::max();
 
               T last_neg_grad = 0;
               T alpha_last_neg = 0;
