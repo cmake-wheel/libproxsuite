@@ -39,6 +39,7 @@ if(NOT nanobind_FOUND)
     external/nanobind
     ${CMAKE_CURRENT_BINARY_DIR}/external/nanobind
   )
+  message(STATUS "Will use nanobind submodule.")
 else()
   message(STATUS "Found installed nanobind.")
 endif()
