@@ -227,7 +227,7 @@ if(
       proxsuite_pywrap_avx2
       "${AVX2_COMPILE_OPTION};${FMA_COMPILE_OPTION}"
       proxsuite-vectorized
-      False
+      FALSE
     )
   endif(BUILD_BINDINGS_WITH_AVX2_SUPPORT)
   if(BUILD_BINDINGS_WITH_AVX512_SUPPORT)
@@ -235,7 +235,7 @@ if(
       proxsuite_pywrap_avx512
       "${AVX512_COMPILE_OPTION};${FMA_COMPILE_OPTION}"
       proxsuite-vectorized
-      False
+      FALSE
     )
   endif(BUILD_BINDINGS_WITH_AVX512_SUPPORT)
 endif()
