@@ -50,8 +50,5 @@ def __getattr__(name: str):
 def __dir__():
     # returns iterable of all accessible attributes in the module.
     # implement this for instropection, for e.g. autocomplete in interpreters (IPython).
-    # Respect the submodule's __all__ (list of public attributes), if available
-    if hasattr(_submodule, "__all__"):
-        return _submodule.__all__
-    # otherwise, return all attributes
+    # We return the attributes from the submodule.
     return dir(_submodule)
