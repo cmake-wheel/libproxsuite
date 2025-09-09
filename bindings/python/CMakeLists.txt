@@ -108,12 +108,18 @@ function(list_filter list regular_expression dest_list)
   set(${dest_list} ${list} PARENT_SCOPE)
 endfunction(list_filter)
 
-function(create_python_target target_name COMPILE_OPTIONS dependencies)
+function(
+  create_python_target
+  target_name
+  compile_options
+  dependencies
+  generate_stubs
+)
   nanobind_add_module(${target_name} ${PYWRAP_SOURCES} ${PYWRAP_HEADERS})
   add_dependencies(${PROJECT_NAME}_python ${target_name})
 
   target_link_libraries(${target_name} PUBLIC ${dependencies})
-  target_compile_options(${target_name} PRIVATE ${COMPILE_OPTIONS})
+  target_compile_options(${target_name} PRIVATE ${compile_options})
   target_link_libraries(${target_name} PRIVATE proxsuite)
   target_compile_definitions(
     ${target_name}
@@ -134,7 +140,7 @@ function(create_python_target target_name COMPILE_OPTIONS dependencies)
     if(LINK_PYTHON_INTERFACE_TO_OPENMP)
       target_link_libraries(${target_name} PRIVATE ${OpenMP_CXX_LIBRARIES})
     endif(LINK_PYTHON_INTERFACE_TO_OPENMP)
-  else(BUILD_WITH_OPENMP_SUPPORT)
+  else()
     list_filter("${PYWRAP_HEADERS}" "expose-parallel" PYWRAP_HEADERS)
   endif(BUILD_WITH_OPENMP_SUPPORT)
 
@@ -174,7 +180,7 @@ function(create_python_target target_name COMPILE_OPTIONS dependencies)
   endif()
 
   install(TARGETS ${target_name} DESTINATION ${${PYWRAP}_INSTALL_DIR})
-  if((${target_name} STREQUAL "proxsuite_pywrap") AND GENERATE_PYTHON_STUBS)
+  if(${generate_stubs})
     set(
       stub_outputs
       ${target_name}/__init__.pyi
@@ -211,7 +217,7 @@ else()
   set(AVX512_COMPILE_OPTION "-mavx512f")
 endif()
 
-create_python_target(proxsuite_pywrap "" proxsuite)
+create_python_target(proxsuite_pywrap "" proxsuite ${GENERATE_PYTHON_STUBS})
 if(
   BUILD_WITH_VECTORIZATION_SUPPORT
   AND ${CMAKE_SYSTEM_PROCESSOR} MATCHES "(x86)|(X86)|(amd64)|(AMD64)"
@@ -221,6 +227,7 @@ if(
       proxsuite_pywrap_avx2
       "${AVX2_COMPILE_OPTION};${FMA_COMPILE_OPTION}"
       proxsuite-vectorized
+      False
     )
   endif(BUILD_BINDINGS_WITH_AVX2_SUPPORT)
   if(BUILD_BINDINGS_WITH_AVX512_SUPPORT)
@@ -228,6 +235,7 @@ if(
       proxsuite_pywrap_avx512
       "${AVX512_COMPILE_OPTION};${FMA_COMPILE_OPTION}"
       proxsuite-vectorized
+      False
     )
   endif(BUILD_BINDINGS_WITH_AVX512_SUPPORT)
 endif()
