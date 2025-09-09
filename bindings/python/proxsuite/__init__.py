@@ -43,13 +43,14 @@ _submodule = _load_main_module()
 
 
 def __getattr__(name: str):
+    # reroute proxsuite module's attributes to be that of the loaded submodule.
     return getattr(_submodule, name)
 
 
 def __dir__():
-    # implement this for instropection
-    # e.g. autocomplete in IPython.
-    # Respect the submodule's __all__ if available
+    # returns iterable of all accessible attributes in the module.
+    # implement this for instropection, for e.g. autocomplete in interpreters (IPython).
+    # Respect the submodule's __all__ (list of public attributes), if available
     if hasattr(_submodule, "__all__"):
         return _submodule.__all__
     # otherwise, return all attributes
