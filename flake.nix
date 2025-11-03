@@ -8,73 +8,86 @@
 
   outputs =
     inputs:
-    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = inputs.nixpkgs.lib.systems.flakeExposed;
-      perSystem =
-        {
-          pkgs,
-          pkgs-eigen_5,
-          self',
-          system,
-          ...
-        }:
-        {
-          _module.args =
-            let
-              proxsuiteOverlay = final: prev: {
-                proxsuite = prev.proxsuite.overrideAttrs {
-                  src = final.lib.fileset.toSource {
-                    root = ./.;
-                    fileset = final.lib.fileset.unions [
-                      ./benchmark
-                      ./bindings
-                      ./cmake-external
-                      ./CMakeLists.txt
-                      ./doc
-                      ./examples
-                      ./include
-                      ./package.xml
-                      ./test
-                    ];
-                  };
-                  postPatch = "";
-                };
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } (
+      { self, lib, ... }:
+      {
+        systems = inputs.nixpkgs.lib.systems.flakeExposed;
+        flake.overlays = {
+          default = final: prev: {
+            proxsuite = prev.proxsuite.overrideAttrs {
+              src = lib.fileset.toSource {
+                root = ./.;
+                fileset = lib.fileset.unions [
+                  ./benchmark
+                  ./bindings
+                  ./cmake-external
+                  ./CMakeLists.txt
+                  ./doc
+                  ./examples
+                  ./include
+                  ./package.xml
+                  ./test
+                ];
               };
-              eigen5Overlay = final: prev: {
-                eigen = prev.eigen.overrideAttrs (super: rec {
-                  version = "5.0.0";
-                  src = final.fetchFromGitLab {
-                    inherit (super.src) owner repo;
-                    tag = version;
-                    hash = "sha256-L1KUFZsaibC/FD6abTXrT3pvaFhbYnw+GaWsxM2gaxM=";
-                  };
-                  patches = [ ];
-                  postPatch = "";
-                });
+              postPatch = "";
+              nativeCheckInputs = [
+                final.ctestCheckHook
+              ];
+              # ref. https://github.com/Simple-Robotics/proxsuite/issues/426
+              preCheck = ''
+                disabledTests+=(
+                  "ProxQP::dense: test primal infeasibility solving"
+                  "dense maros meszaros using the api"
+                  "sparse maros meszaros using the API"
+                )
+              '';
+            };
+          };
+          eigen5 = final: prev: {
+            eigen = prev.eigen.overrideAttrs (super: rec {
+              version = "5.0.0";
+              src = final.fetchFromGitLab {
+                inherit (super.src) owner repo;
+                tag = version;
+                hash = "sha256-L1KUFZsaibC/FD6abTXrT3pvaFhbYnw+GaWsxM2gaxM=";
               };
-            in
-            {
+              patches = [ ];
+              postPatch = "";
+            });
+          };
+        };
+        perSystem =
+          {
+            pkgs,
+            pkgs-eigen_5,
+            self',
+            system,
+            ...
+          }:
+          {
+            _module.args = {
               pkgs = import inputs.nixpkgs {
                 inherit system;
-                overlays = [ proxsuiteOverlay ];
+                overlays = [ self.overlays.default ];
               };
               pkgs-eigen_5 = import inputs.nixpkgs {
                 inherit system;
                 overlays = [
-                  eigen5Overlay
-                  proxsuiteOverlay
+                  self.overlays.eigen5
+                  self.overlays.default
                 ];
               };
             };
-          apps.default = {
-            type = "app";
-            program = pkgs.python3.withPackages (_: [ self'.packages.default ]);
+            apps.default = {
+              type = "app";
+              program = pkgs.python3.withPackages (_: [ self'.packages.default ]);
+            };
+            packages = {
+              default = self'.packages.proxsuite;
+              proxsuite = pkgs.python3Packages.proxsuite;
+              proxsuite-eigen_5 = pkgs-eigen_5.python3Packages.proxsuite;
+            };
           };
-          packages = {
-            default = self'.packages.proxsuite;
-            proxsuite = pkgs.python3Packages.proxsuite;
-            proxsuite-eigen_5 = pkgs-eigen_5.python3Packages.proxsuite;
-          };
-        };
-    };
+      }
+    );
 }
