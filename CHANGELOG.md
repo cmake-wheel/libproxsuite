@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Recursive stub generation for Python bindings ([#419](https://github.com/Simple-Robotics/proxsuite/pull/419))
 
 ### Changed
+- Redefine the `load_qp` function in the Maros-Meszaros unit tests ([#433])(https://github.com/Simple-Robotics/proxsuite/pull/433)
 - Change the default branch to `devel` ([#395](https://github.com/Simple-Robotics/proxsuite/pull/395))
 - Change `dual_feasibility` test threshold in `sparse_maros_meszaros` unit test ([#403](https://github.com/Simple-Robotics/proxsuite/pull/403))
 - replace `std::numeric_limits<T>::infinity()` by `std::numeric_limits<T>::max()` ([#413](https://github.com/Simple-Robotics/proxsuite/pull/413))
