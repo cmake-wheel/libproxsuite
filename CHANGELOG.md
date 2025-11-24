@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Better dynamic module handling ([#419](https://github.com/Simple-Robotics/proxsuite/pull/419))
 
 ### Fixed
+- Correction of the status update for `PROXQP_SOLVED_CLOSEST_PRIMAL_FEASIBLE` ([#432])(https://github.com/Simple-Robotics/proxsuite/pull/432)
 - Use the right table to store `configure-args` cmeel argument ([#403](https://github.com/Simple-Robotics/proxsuite/pull/403))
 - Allow project to be used as an external CMake project (FetchContent) ([#408](https://github.com/Simple-Robotics/proxsuite/pull/408))
 - Fix -Wdeprecated-literal-operator warning ([#420](https://github.com/Simple-Robotics/proxsuite/pull/420))
