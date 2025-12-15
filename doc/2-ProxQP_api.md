@@ -413,9 +413,8 @@ In this table, you have the three columns from left to right: the name of the se
 | HessianType                         | Dense                              | Defines the type of problem solved (Dense, Zero, or Diagonal). In case the Zero or Diagonal option is used, the solver exploits the Hessian structure to evaluate the Cholesky factorization efficiently.
 | primal_infeasibility_solving        | False                              | If set to true, it solves the closest primal feasible problem if primal infeasibility is detected.
 | nb_power_iteration                  | 1000                               | Number of power iteration iteration used by default for estimating H lowest eigenvalue.
-| power_iteration_accuracy            | 1.E-6                              | If set to true, it solves the closest primal feasible problem if primal infeasibility is detected.
-| primal_infeasibility_solving        | False                              | Accuracy target of the power iteration algorithm for estimating the lowest eigenvalue of H.
-| estimate_method_option           | NoRegularization                   | Option for estimating the minimal eigen value of H and regularizing default_rho  default_rho=rho_regularization_scaling*abs(default_H_eigenvalue_estimate). This option can be used for solving non convex QPs.
+| power_iteration_accuracy            | 1.E-6                              | Accuracy target of the power iteration algorithm for estimating the lowest eigenvalue of H.
+| estimate_method_option              | NoRegularization                   | Option for estimating the minimal eigen value of H and regularizing default_rho  default_rho=rho_regularization_scaling*abs(default_H_eigenvalue_estimate). This option can be used for solving non convex QPs.
 | default_H_eigenvalue_estimate       | 0.                                 | Default estimate of the minimal eigen value of H.
 | rho_regularization_scaling          | 1.5                                | Scaling for regularizing default_rho according to the minimal eigen value of H.
 
