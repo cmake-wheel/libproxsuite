@@ -275,8 +275,7 @@ if(
   # Create a new __init__.py file containing both the content of __init__.py
   # prepended with the OPENMP_KMP_DUPLICATE_LIB_OK_SCRIPT content
   file(
-    WRITE
-    ${generated_init_dot_py_file}
+    WRITE ${generated_init_dot_py_file}
     ${OPENMP_KMP_DUPLICATE_LIB_OK_SCRIPT}
   )
   file(APPEND ${generated_init_dot_py_file} ${INIT_CONTENT})
