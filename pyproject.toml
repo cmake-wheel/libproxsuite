@@ -1,28 +1,41 @@
+[build-system]
+build-backend = "cmeel"
+requires = [
+  "cmeel-cereal",
+  "cmeel-eigen",
+  "cmeel-simde",
+  "cmeel[build]",
+  "jrl-cmakemodules",
+  "nanobind",
+  "typing-extensions"
+]
+
 [project]
-name = "proxsuite"
-version = "0.7.2"
+dependencies = ["numpy", "scipy"]
 description = "Quadratic Programming Solver for Robotics and beyond."
-readme = "README.md"
-requires-python = ">= 3.8"
 license = "BSD-2-Clause"
-dependencies = ["numpy","scipy"]
+name = "proxsuite"
+readme = "README.md"
+requires-python = ">= 3.9"
+version = "0.7.2"
 
 [project.urls]
-homepage = "https://github.com/Simple-Robotics/proxsuite"
-repository = "https://github.com/Simple-Robotics/proxsuite.git"
-
-[build-system]
-requires = [
-    "cmeel[build]",
-    "cmeel-eigen",
-    "cmeel-simde",
-    "typing-extensions",
-    ]
-build-backend = "cmeel.build"
+homepage = "https://github.com/cmake-wheel/proxsuite"
+repository = "https://github.com/cmake-wheel/proxsuite.git"
+upstream = "https://github.com/Simple/proxsuite"
 
 [tool.cmeel]
-configure-args = ["-DBUILD_TESTING:BOOL=OFF","-DBUILD_PYTHON_INTERFACE:BOOL=ON","-DBUILD_WITH_VECTORIZATION_SUPPORT:BOOL=ON","-DINSTALL_DOCUMENTATION:BOOL=OFF","-DBUILD_WITH_OPENMP_SUPPORT=OFF"]
+configure-args = [
+  "-DBUILD_PYTHON_INTERFACE=ON",
+  "-DBUILD_TESTING=OFF",
+  "-DBUILD_WITH_OPENMP_SUPPORT=OFF",
+  "-DBUILD_WITH_VECTORIZATION_SUPPORT=ON",
+  "-DINSTALL_DOCUMENTATION=OFF"
+]
 
 [tool.ruff.lint]
-ignore = [ "E741" ]
-exclude = [ "cmake-module/*", "bindings/python/external/nanobind/*" ]
+exclude = ["bindings/python/external/nanobind/*", "cmake-module/*"]
+ignore = ["E741"]
+
+[tool.tomlsort]
+all = true
