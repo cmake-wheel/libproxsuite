@@ -12,7 +12,7 @@ on:
 
 env:
   CMEEL_LOG_LEVEL: DEBUG
-  DEPS: cmeel-cereal cmeel-eigen cmeel-simde cmeel[build] jrl-cmakemodules nanobind typing-extensions
+  DEPS: cmeel-cereal cmeel-eigen cmeel-simde cmeel[build] jrl-cmakemodules nanobind numpy scipy typing-extensions
   PROJECT: proxsuite
 
 jobs:
