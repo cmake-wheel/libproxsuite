@@ -7,12 +7,13 @@ include(${JRL_CMAKE_MODULES}/python-helpers.cmake)
 
 option(GENERATE_PYTHON_STUBS "Generate Python stubs" OFF)
 
-FINDPYTHON(REQUIRED)
+findpython(REQUIRED)
 set(Python_INCLUDE_DIRS ${Python3_INCLUDE_DIRS})
 # Nanobind expects these targets instead of Python3::*
 # https://github.com/jrl-umi3218/jrl-cmakemodules/issues/708
 add_library(Python::Module ALIAS Python3::Module)
 add_executable(Python::Interpreter ALIAS Python3::Interpreter)
+set(Python_VERSION "${Python3_VERSION}")
 
 if(IS_ABSOLUTE ${PYTHON_SITELIB})
   set(${PYWRAP}_INSTALL_DIR ${PYTHON_SITELIB}/${PROJECT_NAME})
@@ -239,8 +240,8 @@ if(
     )
   endif(BUILD_BINDINGS_WITH_AVX512_SUPPORT)
 endif()
-ADD_HEADER_GROUP(PYWRAP_HEADERS)
-ADD_SOURCE_GROUP(PYWRAP_SOURCES)
+add_header_group(PYWRAP_HEADERS)
+add_source_group(PYWRAP_SOURCES)
 
 # --- INSTALL SCRIPTS
 
@@ -280,7 +281,7 @@ if(
   )
   file(APPEND ${generated_init_dot_py_file} ${INIT_CONTENT})
 
-  PYTHON_BUILD_FILE(
+  python_build_file(
     ${generated_init_dot_py_file}
     ${generated_init_dot_pyc_file}
   )
@@ -289,14 +290,14 @@ if(
     DESTINATION ${${PYWRAP}_INSTALL_DIR}
   )
 else()
-  PYTHON_BUILD(${PROJECT_NAME} __init__.py)
+  python_build(${PROJECT_NAME} __init__.py)
   install(
     FILES "${CMAKE_CURRENT_SOURCE_DIR}/proxsuite/__init__.py"
     DESTINATION ${${PYWRAP}_INSTALL_DIR}
   )
 endif()
 
-PYTHON_BUILD_GET_TARGET(compile_pyc)
+python_build_get_target(compile_pyc)
 add_dependencies(${PROJECT_NAME}_python ${compile_pyc})
 
 set(PYTHON_FILES torch/__init__.py torch/qplayer.py torch/utils.py)
@@ -304,9 +305,9 @@ set(PYTHON_FILES torch/__init__.py torch/qplayer.py torch/utils.py)
 file(MAKE_DIRECTORY ${${PYWRAP}_INSTALL_DIR}/torch)
 
 foreach(python ${PYTHON_FILES})
-  PYTHON_BUILD(${PROJECT_NAME} ${python})
+  python_build(${PROJECT_NAME} ${python})
   get_filename_component(pysubmodule ${python} PATH)
   get_filename_component(pyname ${python} NAME)
   set(MODULE_NAME ${PROJECT_NAME}/${pysubmodule})
-  PYTHON_INSTALL_ON_SITE(${MODULE_NAME} ${pyname})
+  python_install_on_site(${MODULE_NAME} ${pyname})
 endforeach(python)
