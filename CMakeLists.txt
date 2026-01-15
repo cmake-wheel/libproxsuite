@@ -79,7 +79,7 @@ if(POLICY CMP0177)
   set(CMAKE_POLICY_DEFAULT_CMP0177 NEW)
 endif()
 include(${JRL_CMAKE_MODULES}/base.cmake)
-COMPUTE_PROJECT_ARGS(PROJECT_ARGS LANGUAGES CXX)
+compute_project_args(PROJECT_ARGS LANGUAGES CXX)
 project(${PROJECT_NAME} ${PROJECT_ARGS})
 
 include(${JRL_CMAKE_MODULES}/ide.cmake)
@@ -96,8 +96,8 @@ include(${JRL_CMAKE_MODULES}/julia.cmake)
 include(CMakeDependentOption)
 
 # If needed, set CMake policy for APPLE systems
-APPLY_DEFAULT_APPLE_CONFIGURATION()
-SET_DEFAULT_CMAKE_BUILD_TYPE(Release)
+apply_default_apple_configuration()
+set_default_cmake_build_type(Release)
 
 option(INITIALIZE_EIGEN_WITH_NAN "Initialize Eigen objects with NAN values" OFF)
 option(
@@ -164,7 +164,7 @@ endif(CHECK_RUNTIME_MALLOC)
 
 # set CXX standard
 if(DEFINED CMAKE_CXX_STANDARD)
-  CHECK_MINIMAL_CXX_STANDARD(14 ENFORCE)
+  check_minimal_cxx_standard(14 ENFORCE)
 else()
   set(CMAKE_CXX_STANDARD 17)
 endif()
@@ -177,14 +177,14 @@ if(MSVC)
 endif()
 
 # Look for dependencies
-ADD_PROJECT_DEPENDENCY(Eigen3 REQUIRED PKG_CONFIG_REQUIRES "eigen3 >= 3.0.5")
+add_project_dependency(Eigen3 REQUIRED PKG_CONFIG_REQUIRES "eigen3 >= 3.0.5")
 
 set(
   SIMDE_HINT_FAILURE
   "Set BUILD_WITH_VECTORIZATION_SUPPORT=OFF or install Simde on your system.\n If Simde is already installed, ensure that the CMake variable CMAKE_MODULE_PATH correctly points toward the location of FindSimde.cmake file."
 )
 if(BUILD_WITH_VECTORIZATION_SUPPORT)
-  ADD_PROJECT_DEPENDENCY(
+  add_project_dependency(
     Simde
     REQUIRED
     FIND_EXTERNAL "Simde"
@@ -213,7 +213,7 @@ target_include_directories(
 )
 set(EXPORTED_TARGETS_LIST proxsuite)
 
-ADD_HEADER_GROUP(${PROJECT_NAME}_HEADERS)
+add_header_group(${PROJECT_NAME}_HEADERS)
 
 if(BUILD_WITH_VECTORIZATION_SUPPORT)
   add_library(proxsuite-vectorized INTERFACE)
@@ -256,4 +256,4 @@ endif()
 
 add_subdirectory(benchmark)
 
-SETUP_PROJECT_FINALIZE()
+setup_project_finalize()

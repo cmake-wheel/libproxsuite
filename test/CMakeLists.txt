@@ -8,7 +8,7 @@ target_link_libraries(cnpy Eigen3::Eigen)
 target_include_directories(cnpy PUBLIC ./include)
 
 file(GLOB_RECURSE TEST_HEADERS ./include/*.hpp)
-ADD_HEADER_GROUP(TEST_HEADERS)
+add_header_group(TEST_HEADERS)
 
 add_library(
   proxsuite-test-util
@@ -107,7 +107,7 @@ if(BUILD_PYTHON_INTERFACE)
   foreach(TEST_FILE ${${PROJECT_NAME}_PYTHON_UNITTEST})
     get_filename_component(TEST_NAME ${TEST_FILE} NAME_WE)
     string(REGEX REPLACE "${PROJECT_SOURCE_DIR}/" "" TEST_FILE ${TEST_FILE})
-    ADD_PYTHON_UNIT_TEST(
+    add_python_unit_test(
       "${PROJECT_NAME}-test-py-${TEST_NAME}"
       "${TEST_FILE}"
       "bindings/python"

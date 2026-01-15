@@ -7,7 +7,7 @@ endif(BUILD_PYTHON_INTERFACE)
 if(TEST_JULIA_INTERFACE)
   find_package(Julia REQUIRED)
 
-  JULIA_CHECK_PACKAGE(PyCall)
+  julia_check_package(PyCall)
   if(NOT Julia_PyCall_found)
     message(
       FATAL_ERROR
