@@ -22,6 +22,7 @@ repository = "https://github.com/cmake-wheel/libproxsuite.git"
 upstream = "https://github.com/Simple/proxsuite"
 
 [tool.cmeel]
+build-number = 0
 configure-args = [
   "-DBUILD_PYTHON_INTERFACE=OFF",
   "-DBUILD_TESTING=OFF",
