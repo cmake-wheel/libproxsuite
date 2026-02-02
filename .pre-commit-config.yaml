@@ -1,6 +1,6 @@
 repos:
 - repo: https://github.com/BlankSpruce/gersemi
-  rev: 0.25.2
+  rev: 0.25.4
   hooks:
   - id: gersemi
 - repo: https://github.com/astral-sh/ruff-pre-commit
