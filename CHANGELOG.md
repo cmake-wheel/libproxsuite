@@ -6,24 +6,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.7.3] - 2026-05-11
+
 ### Added
 - Recursive stub generation for Python bindings ([#419](https://github.com/Simple-Robotics/proxsuite/pull/419))
 
 ### Changed
-- Redefine the `load_qp` function in the Maros-Meszaros unit tests ([#433])(https://github.com/Simple-Robotics/proxsuite/pull/433)
+- Redefine the `load_qp` function in the Maros-Meszaros unit tests ([#433](https://github.com/Simple-Robotics/proxsuite/pull/433))
 - Change the default branch to `devel` ([#395](https://github.com/Simple-Robotics/proxsuite/pull/395))
 - Change `dual_feasibility` test threshold in `sparse_maros_meszaros` unit test ([#403](https://github.com/Simple-Robotics/proxsuite/pull/403))
 - replace `std::numeric_limits<T>::infinity()` by `std::numeric_limits<T>::max()` ([#413](https://github.com/Simple-Robotics/proxsuite/pull/413))
 - Upgraded nanobind dependency version (submodule) to v2.9.2 ([#418](https://github.com/Simple-Robotics/proxsuite/pull/418))
 - Better dynamic module handling ([#419](https://github.com/Simple-Robotics/proxsuite/pull/419))
+- Fix `SyntaxError` on importing `proxsuite.torch.qplayer` caused by invalid escape sequences in the `QPFunction` docstring ([#458](https://github.com/Simple-Robotics/proxsuite/pull/461))
 
 ### Fixed
-- Correction of the status update for `PROXQP_SOLVED_CLOSEST_PRIMAL_FEASIBLE` ([#432])(https://github.com/Simple-Robotics/proxsuite/pull/432)
+- Correction of the status update for `PROXQP_SOLVED_CLOSEST_PRIMAL_FEASIBLE` ([#432](https://github.com/Simple-Robotics/proxsuite/pull/432))
 - Use the right table to store `configure-args` cmeel argument ([#403](https://github.com/Simple-Robotics/proxsuite/pull/403))
 - Allow project to be used as an external CMake project (FetchContent) ([#408](https://github.com/Simple-Robotics/proxsuite/pull/408))
 - Fix -Wdeprecated-literal-operator warning ([#420](https://github.com/Simple-Robotics/proxsuite/pull/420))
 - Fix compilation error with Apple Clang compiler ([#431](https://github.com/Simple-Robotics/proxsuite/pull/431))
 - Fix `settings.primal_infeasibility_solving` documentation ([#438](https://github.com/Simple-Robotics/proxsuite/pull/438))
+- Various fixes for equality comparisons for `Results` and `Settings` objects ([#450](https://github.com/Simple-Robotics/proxsuite/pull/450)
+- Fix doc generation with latex ([#453](https://github.com/Simple-Robotics/proxsuite/pull/453))
 
 ### Removed
 - Don't release PyPy package on GNU/Linux anymore ([#403](https://github.com/Simple-Robotics/proxsuite/pull/403))
@@ -487,7 +492,8 @@ More to come ([#](a forthcoming release.))
 The first release of ProxSuite.
 
 
-[Unreleased]: https://github.com/Simple-Robotics/proxsuite/compare/v0.7.2...HEAD
+[Unreleased]: https://github.com/Simple-Robotics/proxsuite/compare/v0.7.3...HEAD
+[0.7.3]: https://github.com/Simple-Robotics/proxsuite/compare/v0.7.2...v0.7.3
 [0.7.2]: https://github.com/Simple-Robotics/proxsuite/compare/v0.7.1...v0.7.2
 [0.7.1]: https://github.com/Simple-Robotics/proxsuite/compare/v0.7.0...v0.7.1
 [0.7.0]: https://github.com/Simple-Robotics/proxsuite/compare/v0.6.7...v0.7.0
